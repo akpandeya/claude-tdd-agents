@@ -1,114 +1,266 @@
-# Claude TDD Agents
+# Agentic Workflows
 
-Reusable Claude Code agents for strict Test-Driven Development (TDD) and Domain-Driven Design (DDD) workflows.
+Comprehensive collection of specialized agents for software development, documentation, DevOps, data science, and planning workflows. Built for Claude Code with strict Test-Driven Development and Domain-Driven Design principles.
 
-## What are Claude Code Agents?
+## What are Agents?
 
-Agents are explicitly-invokable assistants with specialized knowledge and tools. Unlike skills (which Claude discovers automatically), agents run in isolated contexts with restricted tool access, perfect for complex multi-step workflows like TDD/DDD.
+Agents are explicitly-invokable assistants with specialized knowledge and isolated contexts. Unlike auto-discovered skills, agents provide complex multi-step workflows with restricted tool access, perfect for disciplined development practices.
 
-## Agents Included
+## Agent Categories
 
-### 1. test-writer
-Write comprehensive tests BEFORE implementation
+### Development Agents
 
-- **Enforces:** Strict TDD (tests first, always)
-- **Coverage:** Minimum 80% required
-- **Patterns:** AAA (Arrange, Act, Assert)
-- **Frameworks:** Vitest, pytest
-- **Invocation:** `/test_writer`
+#### Test-Driven Development (TDD)
+Strict red-green-refactor cycle with 80% coverage requirements.
 
-### 2. code-writer
-Implement code following TDD red-green-refactor cycle
+**Language-Specific Test Writers:**
+- `/test_writer_ts` - TypeScript/JavaScript test writing (Vitest, React Testing Library)
+- `/test_writer_py` - Python test writing (pytest, pytest-asyncio)
 
-- **Enforces:** Tests must exist and fail first
-- **Patterns:** DDD (entities, value objects, aggregates)
-- **Architecture:** Clean architecture layers
-- **Quality:** SOLID principles, self-documenting code
-- **Invocation:** `/code_writer`
+**Language-Specific Code Writers:**
+- `/code_writer_ts` - TypeScript/JavaScript implementation with DDD patterns
+- `/code_writer_py` - Python implementation with DDD patterns
 
-### 3. test-runner
-Execute tests and provide detailed feedback
+**Language-Agnostic:**
+- `/test_runner` - Execute tests and analyze results (Vitest or pytest)
+- `/ddd_architect` - Domain modeling and architecture guidance
 
-- **Runs:** Vitest, pytest with coverage
-- **Reports:** Pass/fail, coverage metrics
-- **Analyzes:** Failures with suggestions
-- **Modes:** Watch mode for TDD workflow
-- **Invocation:** `/test_runner`
+#### Architecture & Design
+- `/ddd_architect` - Domain-Driven Design patterns and bounded contexts
 
-### 4. ddd-architect
-Guide domain modeling and architecture decisions
+#### Coming Soon
+- Refactoring agents (code improvement, pattern application)
+- Debugging agents (bug investigation, performance profiling)
+- Code review agents (quality analysis, best practices)
 
-- **Designs:** Bounded contexts, aggregates
-- **Patterns:** Entities, value objects, repositories
-- **Architecture:** Layered architecture
-- **Events:** Domain events and CQRS
-- **Invocation:** `/ddd_architect`
+### Documentation Agents (Coming Soon)
+- README writers
+- API documentation generators
+- Technical writing assistants
+- Blog post creators
 
-## Installation
+### DevOps Agents (Coming Soon)
+- Docker and containerization helpers
+- Kubernetes configuration
+- CI/CD pipeline designers
+- Infrastructure as Code assistants
 
-### Option 1: Symlink to Projects (Recommended)
+### Data Science Agents (Coming Soon)
+- Data analysis and visualization
+- ML pipeline builders
+- Model training workflows
+- Experiment tracking
 
-Symlinks keep agents updated automatically across all projects.
+### Planning Agents (Coming Soon)
+- Project planning and breakdown
+- Sprint planning
+- Architecture decision records
+
+## Quick Start
+
+### TypeScript/JavaScript Project
 
 ```bash
-# In your project directory
+# Create agents directory
 mkdir -p .claude/agents
 
-# Create symlinks to agents
+# Link TypeScript TDD agents
 cd .claude/agents
-ln -s /path/to/claude-tdd-agents/agents/test-writer.md test-writer.md
-ln -s /path/to/claude-tdd-agents/agents/code-writer.md code-writer.md
-ln -s /path/to/claude-tdd-agents/agents/test-runner.md test-runner.md
-ln -s /path/to/claude-tdd-agents/agents/ddd-architect.md ddd-architect.md
+ln -s /path/to/agentic-workflows/development/tdd/test-writer-ts.md test-writer-ts.md
+ln -s /path/to/agentic-workflows/development/tdd/code-writer-ts.md code-writer-ts.md
+ln -s /path/to/agentic-workflows/development/tdd/test-runner.md test-runner.md
+ln -s /path/to/agentic-workflows/development/architecture/ddd-architect.md ddd-architect.md
 ```
 
-### Option 2: Copy Agents
+Invoke agents:
+```bash
+/test_writer_ts   # Write Vitest tests
+/code_writer_ts   # Implement TypeScript code
+/test_runner      # Run tests with coverage
+/ddd_architect    # Get domain modeling advice
+```
+
+### Python Project
 
 ```bash
-# Copy agents directory
-cp -r /path/to/claude-tdd-agents/agents .claude/
+# Create agents directory
+mkdir -p .claude/agents
+
+# Link Python TDD agents
+cd .claude/agents
+ln -s /path/to/agentic-workflows/development/tdd/test-writer-py.md test-writer-py.md
+ln -s /path/to/agentic-workflows/development/tdd/code-writer-py.md code-writer-py.md
+ln -s /path/to/agentic-workflows/development/tdd/test-runner.md test-runner.md
+ln -s /path/to/agentic-workflows/development/architecture/ddd-architect.md ddd-architect.md
 ```
 
-## Usage
+Invoke agents:
+```bash
+/test_writer_py   # Write pytest tests
+/code_writer_py   # Implement Python code
+/test_runner      # Run tests with coverage
+/ddd_architect    # Get domain modeling advice
+```
 
-### Invoke Agents
-
-Use slash commands to explicitly invoke agents:
+### Monorepo (Both Languages)
 
 ```bash
-/test_writer     # Write tests for new feature
-/code_writer     # Implement code (after tests exist)
-/test_runner     # Run tests and show coverage
-/ddd_architect   # Get domain modeling guidance
+# Link both TypeScript and Python agents
+cd .claude/agents
+ln -s /path/to/agentic-workflows/development/tdd/test-writer-ts.md test-writer-ts.md
+ln -s /path/to/agentic-workflows/development/tdd/test-writer-py.md test-writer-py.md
+ln -s /path/to/agentic-workflows/development/tdd/code-writer-ts.md code-writer-ts.md
+ln -s /path/to/agentic-workflows/development/tdd/code-writer-py.md code-writer-py.md
+ln -s /path/to/agentic-workflows/development/tdd/test-runner.md test-runner.md
+ln -s /path/to/agentic-workflows/development/architecture/ddd-architect.md ddd-architect.md
 ```
 
-### TDD Workflow
+## TDD Workflow
 
-1. **RED:** Invoke `/test_writer` to create failing tests
-2. **GREEN:** Invoke `/code_writer` to implement minimal code
-3. **VERIFY:** Invoke `/test_runner` to confirm tests pass
-4. **REFACTOR:** Invoke `/code_writer` to improve code quality
-5. **REPEAT:** Continue red-green-refactor cycle
+Strict Test-Driven Development with 80% minimum coverage:
 
-### Example Session
+1. **RED Phase** - Write failing tests first
+   ```bash
+   /test_writer_ts "Test user authentication with JWT"
+   # Agent writes comprehensive Vitest tests
+   # Tests fail (no implementation yet)
+   ```
+
+2. **GREEN Phase** - Implement minimal code
+   ```bash
+   /code_writer_ts "Implement JWT authentication"
+   # Agent writes minimal code to pass tests
+   # Follows DDD patterns
+   ```
+
+3. **VERIFY Phase** - Run tests and check coverage
+   ```bash
+   /test_runner
+   # Agent runs tests, reports coverage
+   # Ensures 80% threshold met
+   ```
+
+4. **REFACTOR Phase** - Improve code quality
+   ```bash
+   /code_writer_ts "Refactor auth logic for clarity"
+   # Agent improves code while tests stay green
+   ```
+
+## Domain-Driven Design
+
+All agents follow DDD principles:
+
+**Entities** - Objects with unique identity:
+```typescript
+class User {
+  constructor(
+    public readonly id: string,
+    private _email: string
+  ) {}
+}
+```
+
+**Value Objects** - Immutable objects defined by attributes:
+```typescript
+class EmailAddress {
+  private constructor(private readonly value: string) {}
+  static create(email: string): EmailAddress { ... }
+}
+```
+
+**Aggregates** - Clusters with one root entity:
+```typescript
+class Order { // Root
+  private _items: OrderItem[] = []; // Child entities
+  addItem(item: OrderItem) { ... }
+}
+```
+
+**Repositories** - Domain interface + infrastructure implementation:
+```typescript
+interface UserRepository {
+  findById(id: string): Promise<User>;
+}
+```
+
+See `shared/examples/` for complete examples.
+
+## Why Language-Specific Agents?
+
+**Smaller Context** - TypeScript agent: ~250 lines vs combined ~450 lines
+
+**Focused Knowledge** - Vitest-specific patterns vs mixing pytest/Vitest
+
+**Faster Responses** - Less content to process
+
+**Better Recommendations** - Language-specific best practices
+
+## Repository Structure
 
 ```
-User: "I need to add user authentication to my app"
+agentic-workflows/
+├── development/
+│   ├── tdd/
+│   │   ├── test-writer-ts.md      # TypeScript test writer
+│   │   ├── test-writer-py.md      # Python test writer
+│   │   ├── code-writer-ts.md      # TypeScript implementation
+│   │   ├── code-writer-py.md      # Python implementation
+│   │   ├── test-runner.md         # Language-agnostic test runner
+│   │   └── README.md              # TDD workflow guide
+│   ├── architecture/
+│   │   └── ddd-architect.md       # Domain-Driven Design
+│   ├── refactoring/               # Future: refactoring agents
+│   └── debugging/                 # Future: debugging agents
+├── documentation/                  # Future: documentation agents
+├── devops/                        # Future: DevOps agents
+├── data-science/                  # Future: data science agents
+├── planning/                      # Future: planning agents
+├── shared/
+│   ├── tdd/
+│   │   ├── tdd-principles.md     # Red-Green-Refactor cycle
+│   │   ├── ddd-patterns.md       # DDD reference
+│   │   └── test-templates/       # Test templates
+│   └── examples/
+│       ├── entity-example.ts
+│       ├── value-object-example.ts
+│       └── aggregate-example.ts
+└── README.md                      # This file
+```
 
-User: /ddd_architect
-→ Agent designs User aggregate, AuthService, value objects
+## Agent Principles
 
-User: /test_writer
-→ Agent writes comprehensive tests for User entity
+All agents follow these principles:
 
-User: /code_writer
-→ Agent implements User entity to make tests pass
+1. **Tests First** - No code without failing tests
+2. **80% Coverage** - Minimum threshold for all code
+3. **Self-Documenting** - Clear names over comments
+4. **Domain-Driven** - Use DDD patterns
+5. **Clean Architecture** - Separate concerns into layers
+6. **SOLID** - Single Responsibility, Open/Closed, etc.
 
-User: /test_runner
-→ Agent runs tests, confirms 87% coverage, all green
+## Coverage Requirements
 
-User: /code_writer refactor authentication logic
-→ Agent improves code while keeping tests green
+**Minimum Thresholds (ALL must pass):**
+- Lines: 80%
+- Branches: 80%
+- Functions: 80%
+- Statements: 80%
+
+**Test Organization:**
+```
+TypeScript:
+src/components/
+├── BlogCard.tsx
+└── __tests__/
+    └── BlogCard.test.tsx
+
+Python:
+backend/
+├── domain/
+│   └── user.py
+└── tests/
+    └── domain/
+        └── test_user.py
 ```
 
 ## Configuration
@@ -181,125 +333,37 @@ fail_under = 80
 show_missing = true
 ```
 
-## Requirements
+## Project Integration
 
-- **Claude Code CLI:** Latest version
-- **Testing Framework:** Vitest (TypeScript) or pytest (Python)
-- **Coverage Tool:** @vitest/coverage-v8 or pytest-cov
-- **Minimum Coverage:** 80% (all metrics)
-- **CI/CD:** GitHub Actions (optional)
+### Create Project Guide
 
-## Project Structure
-
-```
-claude-tdd-agents/
-├── agents/                        # Agent definitions
-│   ├── test-writer.md            # Test writing agent (YAML + Markdown)
-│   ├── code-writer.md            # Code implementation agent
-│   ├── test-runner.md            # Test execution agent
-│   └── ddd-architect.md          # Domain modeling agent
-├── shared/                        # Reference materials
-│   ├── tdd-principles.md         # TDD best practices
-│   ├── ddd-patterns.md           # DDD pattern reference
-│   └── test-templates/           # Test templates
-│       ├── vitest-unit.template.ts
-│       ├── vitest-integration.template.ts
-│       └── pytest-unit.template.py
-├── examples/                      # DDD code examples
-│   ├── entity-example.ts         # Entity pattern
-│   ├── value-object-example.ts   # Value object pattern
-│   └── aggregate-example.ts      # Aggregate pattern
-└── README.md                      # This file
-```
-
-## Agent Behavior
-
-### Strict TDD Enforcement
-
-Agents enforce TDD discipline:
-
-- **test-writer:** Refuses to write implementation code
-- **code-writer:** Requires failing tests before implementing
-- **test-runner:** Validates coverage meets 80% threshold
-- **ddd-architect:** Guides proper domain modeling
-
-### Isolated Contexts
-
-Each agent runs in its own context with specific tools:
-
-- **test-writer:** Read, Edit, Write, Bash, Glob, Grep
-- **code-writer:** Read, Edit, Write, Bash, Glob, Grep
-- **test-runner:** Bash, Read, Grep, Glob
-- **ddd-architect:** Read, Glob, Grep
-
-### Self-Documenting Code
-
-All agents follow the principle of self-documenting code:
-
-- Clear, descriptive names
-- No unnecessary comments
-- Comments only for business logic
-- Functions/variables explain intent
-
-## Best Practices
-
-1. **Always write tests first** - Invoke `/test_writer` before `/code_writer`
-2. **Small iterations** - Test one small piece of functionality at a time
-3. **Run tests frequently** - Use `/test_runner` after every change
-4. **Domain modeling first** - Consult `/ddd_architect` for complex features
-5. **Maintain green builds** - Never commit failing tests
-6. **Refactor when green** - Improve code only after tests pass
-7. **80% minimum coverage** - All code must be tested
-
-## Shared Resources
-
-The `shared/` directory contains reference materials:
-
-- **tdd-principles.md:** Red-Green-Refactor cycle, AAA pattern, coverage requirements
-- **ddd-patterns.md:** Entities, value objects, aggregates, repositories, domain events
-- **test-templates/:** Reusable test templates for common patterns
-
-## Examples
-
-The `examples/` directory contains concrete DDD implementations:
-
-- **entity-example.ts:** User entity with business logic
-- **value-object-example.ts:** Email, Money, Address, DateRange value objects
-- **aggregate-example.ts:** Order aggregate with OrderLine child entities
-
-## Integration with Projects
-
-### Create claude.md in Your Project
-
-Document your project's TDD/DDD workflow:
+Document agent usage in your project:
 
 ```markdown
-# Claude Code Guide for MyProject
+# claude.md
 
-## Agents Available
+## TDD Workflow
 
-- `/test_writer` - Generate comprehensive tests
-- `/code_writer` - Implement code following TDD/DDD
-- `/test_runner` - Execute tests and check coverage
-- `/ddd_architect` - Domain modeling guidance
+- `/test_writer_ts` - Write Vitest tests
+- `/code_writer_ts` - Implement TypeScript
+- `/test_runner` - Run tests
+- `/ddd_architect` - Domain modeling
 
 ## Domain Model
 
 **Bounded Contexts:**
 - User Management
-- Product Catalog
-- Order Processing
+- Content Publishing
 
-**Key Aggregates:**
-- User (root: User, entities: Profile, Preferences)
-- Product (root: Product, entities: Variant, Review)
-- Order (root: Order, entities: OrderLine, Payment)
+**Aggregates:**
+- User (root: User, entities: Profile)
+- BlogPost (root: Post, entities: Comment)
 ```
 
-### Update GitHub Actions
+### CI/CD Integration
 
 ```yaml
-name: CI/CD Pipeline
+name: TDD Pipeline
 
 on: [push, pull_request]
 
@@ -321,9 +385,69 @@ jobs:
       - run: echo "Deploy only after tests pass"
 ```
 
+## Future Expansion
+
+### Planned Agent Categories
+
+**Development:**
+- Refactoring (extract functions, apply patterns)
+- Debugging (analyze errors, profile performance)
+- Code Review (quality analysis, security checks)
+
+**Documentation:**
+- README generation
+- API docs (OpenAPI, JSDoc, Sphinx)
+- Technical writing
+
+**DevOps:**
+- Docker (Dockerfile optimization, compose)
+- Kubernetes (manifests, Helm charts)
+- CI/CD (GitHub Actions, GitLab CI)
+
+**Data Science:**
+- Data analysis and visualization
+- ML pipeline builders
+- Experiment tracking
+
+**Planning:**
+- Project breakdown
+- Architecture decision records
+- Sprint planning
+
 ## Contributing
 
-Agents are designed to be strict and opinionated to enforce TDD/DDD best practices. Changes should maintain rigor while improving usability.
+Agents are opinionated to enforce best practices. Changes should maintain rigor while improving usability.
+
+### Agent Creation Template
+
+```yaml
+---
+name: agent-name
+description: Brief description. When to use. Target use case.
+tools: Read, Edit, Write, Bash, Glob, Grep
+model: sonnet
+---
+
+# Agent Name
+
+You are a specialist in [domain].
+
+## Core Capabilities
+[What this agent does]
+
+## When to Use
+[Specific use cases]
+
+## Workflow
+[Step-by-step process]
+```
+
+## Resources
+
+- **TDD Principles:** `shared/tdd/tdd-principles.md`
+- **DDD Patterns:** `shared/tdd/ddd-patterns.md`
+- **Examples:** `shared/examples/`
+- **Test Templates:** `shared/tdd/test-templates/`
 
 ## License
 
@@ -332,9 +456,7 @@ MIT - Use freely in your projects
 ## Support
 
 For help:
-
-1. **Agent Documentation:** Read `.md` files in `agents/`
-2. **Shared Resources:** Check `shared/` for TDD/DDD reference
-3. **Examples:** See `examples/` for DDD patterns
-4. **Templates:** Use `shared/test-templates/` for test structure
-5. **Issues:** Report at https://github.com/akpandeya/claude-tdd-agents/issues
+1. Read agent documentation in `.md` files
+2. Check `shared/` for reference materials
+3. See `shared/examples/` for DDD patterns
+4. Report issues at https://github.com/akpandeya/agentic-workflows/issues
